@@ -1,0 +1,11 @@
+
+Todo: 
+1. Install Dependecies 
+2. Creating MVC model
+3. defining routes
+4. defining methods
+4. possible methods
+ api/movies      GET
+ api/movies      POST
+ api/movies/:id  PUT
+ api/movies/:id  DELETE
