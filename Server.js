@@ -14,7 +14,7 @@ connectDB()
 
 app.use(express.json())
 
-app.use('/api/movies',MovieRoute)
+app.use('/movies',MovieRoute)
 
 
 app.listen(PORT, ()=>{console.log(`Server Running Successfully... ${PORT}`)})
