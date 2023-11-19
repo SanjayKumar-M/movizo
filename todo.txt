@@ -9,3 +9,8 @@ Todo:
  api/movies      POST
  api/movies/:id  PUT
  api/movies/:id  DELETE
+
+ 5. Creating authentication using jwt
+ 6. integrating with /movie
+ 7. Testing using thunder client
+ 8. Hosting
