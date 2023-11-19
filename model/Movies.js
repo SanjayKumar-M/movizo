@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const movieSchema = mongoose.Schema({
     //name, director, year, language, rating
-
+    
+    
     name:{
         type:String,
         required: true
