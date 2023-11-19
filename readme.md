@@ -107,3 +107,28 @@ Movizo is a backend API that allows users to register, log in, and perform vario
 Still working on movizo to make some cool feature, feel free to contribute
 
 --Sanjay
+
+Some snaps!
+
+![Screenshot from 2023-11-20 01-59-33](https://github.com/SanjayKumar-M/movizo/assets/73515250/75ee709b-454f-4cfa-9e16-677a128b4ec1)
+
+
+![Screenshot from 2023-11-20 01-59-59](https://github.com/SanjayKumar-M/movizo/assets/73515250/574cfc7e-41d0-444e-bf16-c75153171745)
+
+
+![Screenshot from 2023-11-20 02-00-22](https://github.com/SanjayKumar-M/movizo/assets/73515250/afcc5e79-3b60-4181-a611-5afff28f6c94)
+
+
+![Screenshot from 2023-11-20 02-00-53](https://github.com/SanjayKumar-M/movizo/assets/73515250/a5a9dee6-de04-4f4b-bf14-4d8a528e808d)
+
+
+
+
+
+
+
+
+
+
+
+
