@@ -1,7 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import MovieSchema from "../model/Movies.js";
 
-//methods:
+//methods to create: 
 // getMovies, getMovieById, createMovie,deleteMovie,updateMovie
 
 const getMovies = expressAsyncHandler(async (req,res)=>{
@@ -41,4 +41,55 @@ const getMoviesByFilter = expressAsyncHandler(async (req, res) => {
 });
 
 
-export {getMovies, createMovie, getMoviesByFilter}
+const getMovie = expressAsyncHandler(async (req, res) => {
+    const { movieName } = req.params;
+
+   
+    const movie = await MovieSchema.findOne({ name: { $regex: new RegExp(movieName, 'i') } });
+
+    if (!movie) {
+        return res.status(404).json({ message: 'Movie not found.' });
+    }
+
+    res.status(200).json(movie);
+});
+
+
+const updateMovie = expressAsyncHandler(async (req, res) => {
+    const { movieName } = req.params;
+    const { name, director, year, language, rating } = req.body;
+
+    const updatedMovie = await MovieSchema.findOneAndUpdate(
+        { name: { $regex: new RegExp(movieName, 'i') } },
+        { name, director, year, language, rating },
+        { new: true } 
+    );
+
+    if (!updatedMovie) {
+        return res.status(404).json({ message: 'Movie not found.' });
+    }
+
+    res.status(200).json(updatedMovie);
+});
+
+
+const deleteMovie = expressAsyncHandler(async (req, res) => {
+    const { movieName } = req.params;
+
+ 
+    const deletedMovie = await MovieSchema.findOneAndDelete({
+        name: { $regex: new RegExp(movieName, 'i') }
+    });
+
+    if (!deletedMovie) {
+        return res.status(404).json({ message: 'Movie not found.' });
+    }
+
+    res.status(200).json({ message: 'Movie deleted successfully.' });
+});
+
+
+
+
+
+export {getMovies, createMovie, getMoviesByFilter,getMovie ,updateMovie, deleteMovie}
