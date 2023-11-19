@@ -12,7 +12,7 @@ const movieSchema = mongoose.Schema({
         required: true
     },
     year:{
-        type:number,
+        type:String,
         required: true
     },
     language:{
@@ -20,7 +20,7 @@ const movieSchema = mongoose.Schema({
         required: true
     },
     rating:{
-        type:number,
+        type:Number,
         required: true
     },
 
