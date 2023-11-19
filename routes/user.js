@@ -1,6 +1,10 @@
 import express from "express";
 
-const User = express.Router()
+const UserRoute = express.Router()
 
-User.post('/signup',registerUser)
-User.post('/login',loginUser)
+UserRoute.post('/signup',registerUser)
+
+UserRoute.post('/login',loginUser)
+
+
+export default UserRoute

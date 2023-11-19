@@ -1,10 +1,17 @@
 import express from "express";
 
-const Movies = express.Router()
+const MovieRoute = express.Router()
 
 
 
-Movies.route('/').get(getMovies)
-Movies.route('/').post(createMovie)
-Movies.route('/').post(getMoviebyId)
-Movies.route('/').post(deleteMovie)
+MovieRoute.route('/').get(getMovies)
+
+MovieRoute.route('/').post(createMovie)
+
+MovieRoute.route('/:id').get(getMoviebyId)
+
+MovieRoute.route('/:id').delete(deleteMovie)
+
+MovieRoute.route('/:id').put(updateMovie)
+
+export default MovieRoute
