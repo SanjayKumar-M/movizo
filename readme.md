@@ -104,6 +104,6 @@ Movizo is a backend API that allows users to register, log in, and perform vario
 - The token generated during login is valid for 15 minutes.
 - Work in progress for additional features.
 
-Still working on movizo to make some cool feature, fell free to contribute
+Still working on movizo to make some cool feature, feel free to contribute
 
 --Sanjay
