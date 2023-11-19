@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const movieSchema = mongoose.Schema({
     //name, director, year, language, rating
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        
+        ref: "User",
+      },
     
     
     name:{
@@ -28,6 +33,5 @@ const movieSchema = mongoose.Schema({
 
 },{timestamps:true})
 
-const MovieSchema = mongoose.model("movies",movieSchema);
+export default mongoose.model("movies",movieSchema);
 
-export default MovieSchema;

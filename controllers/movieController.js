@@ -1,12 +1,12 @@
 import expressAsyncHandler from "express-async-handler";
-import MovieSchema from "../model/Movies.js";
+import movies from "../model/Movies.js";
 
 //methods to create: 
 // getMovies, getMovieById, createMovie,deleteMovie,updateMovie
 
 const getMovies = expressAsyncHandler(async (req,res)=>{
 
-    const Movies = await MovieSchema.find()
+    const Movies = await movies.find({ user_id: req.user.id })
     res.status(200).json(Movies)
 }) 
 
@@ -16,8 +16,8 @@ const createMovie = expressAsyncHandler(async(req,res)=>{
     if(!name || !director || !year || !language || !rating){
         res.status(400).json({message:"Please enter the details"});
     }
-    const newMovie = await MovieSchema.create({
-        name,director,year,language,rating
+    const newMovie = await movies.create({
+        name,director,year,language,rating, user_id: req.user.id,
     })
 
     res.status(201).json(newMovie)
@@ -27,7 +27,7 @@ const getMoviesByFilter = expressAsyncHandler(async (req, res) => {
     const { year, language, name, director, rating } = req.query;
 
 
-    const filter = {};
+    const filter = {user_id: req.user.id};
 
     if (year) filter.year = year;
     if (language) filter.language ={$regex: new RegExp( language, 'i' )};
@@ -35,7 +35,7 @@ const getMoviesByFilter = expressAsyncHandler(async (req, res) => {
     if (director) filter.director = { $regex: new RegExp(director, 'i') }; 
     if (rating) filter.rating = rating;
     
-    const filteredMovies = await MovieSchema.find(filter);
+    const filteredMovies = await movies.find(filter);
 
     res.status(200).json(filteredMovies);
 });
@@ -45,7 +45,7 @@ const getMovie = expressAsyncHandler(async (req, res) => {
     const { movieName } = req.params;
 
    
-    const movie = await MovieSchema.findOne({ name: { $regex: new RegExp(movieName, 'i') } });
+    const movie = await movies.findOne({ name: { $regex: new RegExp(movieName, 'i') },user_id: req.user.id });
 
     if (!movie) {
         return res.status(404).json({ message: 'Movie not found.' });
@@ -59,8 +59,8 @@ const updateMovie = expressAsyncHandler(async (req, res) => {
     const { movieName } = req.params;
     const { name, director, year, language, rating } = req.body;
 
-    const updatedMovie = await MovieSchema.findOneAndUpdate(
-        { name: { $regex: new RegExp(movieName, 'i') } },
+    const updatedMovie = await movies.findOneAndUpdate(
+        { name: { $regex: new RegExp(movieName, 'i') }, user_id: req.user.id },
         { name, director, year, language, rating },
         { new: true } 
     );
@@ -76,17 +76,20 @@ const updateMovie = expressAsyncHandler(async (req, res) => {
 const deleteMovie = expressAsyncHandler(async (req, res) => {
     const { movieName } = req.params;
 
- 
-    const deletedMovie = await MovieSchema.findOneAndDelete({
-        name: { $regex: new RegExp(movieName, 'i') }
+    const movie = await movies.findOne({
+        name: { $regex: new RegExp(movieName, 'i') },
+        user_id: req.user.id.toString(),
     });
 
-    if (!deletedMovie) {
+    if (!movie) {
         return res.status(404).json({ message: 'Movie not found.' });
     }
 
+    await movies.deleteOne({ _id: movie._id });
+
     res.status(200).json({ message: 'Movie deleted successfully.' });
 });
+
 
 
 
